@@ -1,0 +1,28 @@
+^C:\USERS\ANILI\ONEDRIVE\MASAÜSTÜ\ODTU\8. SEM\CENG495\HW1\CENGDEN\BUILD\WINDOWS\X64\CMAKEFILES\745CCFB9770A6F48D1985FA94A065844\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\dev\flutter_windows_3.13.9-stable\flutter "PROJECT_DIR=C:\Users\anili\OneDrive\Masaüstü\ODTU\8. sem\CENG495\HW1\cengden" FLUTTER_ROOT=C:\dev\flutter_windows_3.13.9-stable\flutter "FLUTTER_EPHEMERAL_DIR=C:\Users\anili\OneDrive\Masaüstü\ODTU\8. sem\CENG495\HW1\cengden\windows\flutter\ephemeral" "PROJECT_DIR=C:\Users\anili\OneDrive\Masaüstü\ODTU\8. sem\CENG495\HW1\cengden" "FLUTTER_TARGET=C:\Users\anili\OneDrive\Masaüstü\ODTU\8. sem\CENG495\HW1\cengden\lib\main.dart" DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==,RkxVVFRFUl9XRUJfQ0FOVkFTS0lUX1VSTD1odHRwczovL3d3dy5nc3RhdGljLmNvbS9mbHV0dGVyLWNhbnZhc2tpdC8zZjNlNTYwMjM2NTM5YjdlMjcwMmY1YWM3OTBiMmE0NjkxYjMyZDQ5Lw== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false "PACKAGE_CONFIG=C:\Users\anili\OneDrive\Masaüstü\ODTU\8. sem\CENG495\HW1\cengden\.dart_tool\package_config.json" C:/dev/flutter_windows_3.13.9-stable/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANILI\ONEDRIVE\MASAÜSTÜ\ODTU\8. SEM\CENG495\HW1\CENGDEN\BUILD\WINDOWS\X64\CMAKEFILES\1982D19F7529C0321B07A9FF090B7EA5\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ANILI\ONEDRIVE\MASAÜSTÜ\ODTU\8. SEM\CENG495\HW1\CENGDEN\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/windows" "-BC:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64" --check-stamp-file "C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/flutter/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

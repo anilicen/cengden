@@ -1,0 +1,10 @@
+C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/CMakeFiles/INSTALL.dir
+C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/CMakeFiles/ALL_BUILD.dir
+C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/CMakeFiles/ZERO_CHECK.dir
+C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/flutter/CMakeFiles/flutter_wrapper_app.dir
+C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/flutter/CMakeFiles/flutter_assemble.dir
+C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/flutter/CMakeFiles/INSTALL.dir
+C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/runner/CMakeFiles/cengden.dir
+C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/runner/CMakeFiles/INSTALL.dir
+C:/Users/anili/OneDrive/Masaüstü/ODTU/8. sem/CENG495/HW1/cengden/build/windows/x64/runner/CMakeFiles/ALL_BUILD.dir

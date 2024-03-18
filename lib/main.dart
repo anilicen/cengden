@@ -1,9 +1,18 @@
+import 'package:cengden/data/ItemRepository.dart';
+import 'package:cengden/helpers/request.dart';
+import 'package:cengden/pages/main_page/main_view.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  runApp(MainView());
+  await Request.sendPostRequest();
+  Request.getItems(ItemRepository.itemList);
+  // Request.getItems("computers", ItemRepository.computerList);
+  // Request.getItems("vehicles", ItemRepository.vehicleList);
+  // Request.getItems("privateLessons", ItemRepository.privateLessonList);
 }
 
+//2OVBeAxmXvUf7rQmWABHcpnVZRt7v5P2kb7ALonEfAtn9AtXKtJHi0yAFWrLVeUz mongoDB key
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
