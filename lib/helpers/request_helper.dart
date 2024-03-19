@@ -1,11 +1,11 @@
-import 'package:cengden/entities/Computer.dart';
-import 'package:cengden/entities/Phone.dart';
-import 'package:cengden/entities/PrivateLesson.dart';
-import 'package:cengden/entities/Vehicle.dart';
+import 'package:cengden/domain/entities/Computer.dart';
+import 'package:cengden/domain/entities/Phone.dart';
+import 'package:cengden/domain/entities/PrivateLesson.dart';
+import 'package:cengden/domain/entities/Vehicle.dart';
 import 'package:cengden/helpers/request.dart';
 
 class RequestHelper {
-  Vehicle vehicle = Vehicle(
+  static Vehicle vehicle = Vehicle(
     id: '0',
     title: 'Honda Civic 2018',
     type: 'Sedan',
@@ -18,11 +18,11 @@ class RequestHelper {
     transmissionType: 'CVT',
     mileage: '25,000 km',
     price: '\$12,500',
-    image: 'image path',
+    image: 'https://cdn1.ntv.com.tr/gorsel/fmeyXtve8UedbPr0eMkOEw.jpg?width=1000&mode=both&scale=both&v=1691735326676',
     description: 'good condition Civic with low mileage',
   );
 
-  Phone phone = Phone(
+  static Phone phone = Phone(
     id: '0',
     title: "iPhone 13 Pro Max",
     brand: "Apple",
@@ -35,11 +35,12 @@ class RequestHelper {
     cameraSpecs: {"Main": "12MP", "Ultra Wide": "12MP", "Telephoto": "12MP"},
     batteryCapacity: "4352 mAh",
     price: "\$1,099",
-    image: "image path",
+    image:
+        "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone15pro-digitalmat-gallery-1-202309_GEO_EMEA?wid=728&hei=666&fmt=png-alpha&.v=1693346851387",
     description: "Super iPhone offering from Apple with improved camera capabilities and long battery life.",
   );
 
-  Computer computer = Computer(
+  static Computer computer = Computer(
     id: '0',
     title: "Apple MacBook Pro 16-inch",
     type: "Notebook",
@@ -52,11 +53,12 @@ class RequestHelper {
     graphicsCard: "Apple M1 Pro",
     operatingSystem: "macOS Monterey",
     price: "\$2,499",
-    image: "image path",
+    image:
+        "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/page/franchise/xps/fy24-family-launch/laptop-xps-franchise-page-16-9640-sl-800x550-compare.png?fmt=png-alpha&wid=800&hei=550",
     description: "Powerful MacBook Pro with stunning Retina display, perfect for creative professionals.",
   );
 
-  PrivateLesson lesson = PrivateLesson(
+  static PrivateLesson lesson = PrivateLesson(
     id: '0',
     title: "Programming Fundamentals Course",
     tutorName: "John Smith",
@@ -64,12 +66,12 @@ class RequestHelper {
     location: "Online",
     duration: "1 hour/session",
     price: "\$60",
-    image: "image path",
+    image: "https://blog.pango.education/hubfs/blog_mathslessonplanning-1.jpeg",
     description:
         "Comprehensive course covering programming fundamentals including Data Structures, Algorithms, and C++.",
   );
 
-  void addItem() {
+  static void addItem() {
     Request.addItem(lesson.toJson());
     Request.addItem(vehicle.toJson());
     Request.addItem(phone.toJson());

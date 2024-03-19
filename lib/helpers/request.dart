@@ -1,11 +1,10 @@
-import 'package:cengden/data/ItemRepository.dart';
-import 'package:cengden/entities/Computer.dart';
-import 'package:cengden/entities/Phone.dart';
-import 'package:cengden/entities/PrivateLesson.dart';
-import 'package:cengden/entities/Vehicle.dart';
+import 'package:cengden/domain/entities/Computer.dart';
+import 'package:cengden/domain/entities/Phone.dart';
+import 'package:cengden/domain/entities/PrivateLesson.dart';
+import 'package:cengden/domain/entities/Vehicle.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert'; // Import the dart:convert library
+import 'dart:convert';
 
 class Request {
   static String link =
@@ -18,7 +17,7 @@ class Request {
   static void addItem(Map<String, dynamic> json) async {
     var url = "$endpoint/action/insertOne";
 
-    var response = await Dio().post(
+    await Dio().post(
       url,
       options: Options(
         headers: {
@@ -37,37 +36,130 @@ class Request {
     );
   }
 
-  static Future<void> sendPostRequest() async {
+  static Future<void> sendPostRequest(List<bool> token) async {
     var url = Uri.parse(link);
     var response = await http.post(
       url,
     );
-    print('POST request URL: $url'); // Print the URL here
-    if (response.statusCode == 201) {
-      print('POST request successful');
-      print('Response body: ${response.body}');
-    } else {
-      print('POST request failed with status: ${response.statusCode}');
-      print('Response body: ${response.body}');
-    }
-
-    // Assuming your response body is stored in a variable called responseBody
-    // Parse the JSON response body
     Map<String, dynamic> parsedResponse = json.decode(response.body);
 
-    // Access specific fields in the parsed response
     accessToken = parsedResponse['access_token'];
+    token[0] = true;
     refreshToken = parsedResponse['refresh_token'];
     userId = parsedResponse['user_id'];
-
-    // Print the parsed fields
-    print('Access Token: $accessToken');
-    print('Refresh Token: $refreshToken');
-    print('User ID: $userId');
   }
 
-  static void getItems(List list) async {
-    final params = {'skip': 0, 'limit': 10};
+  static Future<void> getPhoneItems(List<Phone> phoneList, int skip, int limit) async {
+    final params = {'skip': skip, 'limit': limit};
+
+    var response = await Dio().post(
+      '$endpoint/action/find',
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "items",
+          "filter": {'itemType': 'Phone'},
+          ...params,
+        },
+      ),
+    );
+    List docs = response.data['documents'];
+    for (int index = 0; index < docs.length; index++) {
+      phoneList.add(Phone.fromJson(docs.elementAt(index)));
+    }
+  }
+
+  static Future<void> getVehicleItems(List<Vehicle> vehicleList, int skip, int limit) async {
+    final params = {'skip': skip, 'limit': limit};
+
+    var response = await Dio().post(
+      '$endpoint/action/find',
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "items",
+          "filter": {'itemType': 'Vehicle'},
+          ...params,
+        },
+      ),
+    );
+    List docs = response.data['documents'];
+    for (int index = 0; index < docs.length; index++) {
+      vehicleList.add(Vehicle.fromJson(docs.elementAt(index)));
+    }
+  }
+
+  static Future<void> getComputerItems(List<Computer> computerItems, int skip, int limit) async {
+    final params = {'skip': skip, 'limit': limit};
+
+    var response = await Dio().post(
+      '$endpoint/action/find',
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "items",
+          "filter": {'itemType': 'Computer'},
+          ...params,
+        },
+      ),
+    );
+    List docs = response.data['documents'];
+    for (int index = 0; index < docs.length; index++) {
+      computerItems.add(Computer.fromJson(docs.elementAt(index)));
+    }
+  }
+
+  static Future<void> getPrivateLessonItems(List<PrivateLesson> privateLessonList, int skip, int limit) async {
+    final params = {'skip': skip, 'limit': limit};
+
+    var response = await Dio().post(
+      '$endpoint/action/find',
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "items",
+          "filter": {'itemType': 'PrivateLesson'},
+          ...params,
+        },
+      ),
+    );
+    List docs = response.data['documents'];
+    for (int index = 0; index < docs.length; index++) {
+      privateLessonList.add(PrivateLesson.fromJson(docs.elementAt(index)));
+    }
+  }
+
+  static Future<void> getItems(List itemList, List<Phone> phoneList, List<Vehicle> vehicleList,
+      List<Computer> computerList, List<PrivateLesson> privateLessonList, int skip) async {
+    final params = {'skip': skip, 'limit': 10};
 
     var response = await Dio().post(
       '$endpoint/action/find',
@@ -87,21 +179,24 @@ class Request {
         },
       ),
     );
-    print("RESPONSE");
     List docs = response.data['documents'];
     for (int index = 0; index < docs.length; index++) {
       switch (docs.elementAt(index)['itemType']) {
         case "Phone":
-          list.add(Phone.fromJson(docs.elementAt(index)));
+          itemList.add(Phone.fromJson(docs.elementAt(index)));
+          phoneList.add(Phone.fromJson(docs.elementAt(index)));
           break;
         case "Computer":
-          list.add(Computer.fromJson(docs.elementAt(index)));
+          itemList.add(Computer.fromJson(docs.elementAt(index)));
+          computerList.add(Computer.fromJson(docs.elementAt(index)));
           break;
         case "PrivateLesson":
-          list.add(PrivateLesson.fromJson(docs.elementAt(index)));
+          itemList.add(PrivateLesson.fromJson(docs.elementAt(index)));
+          privateLessonList.add(PrivateLesson.fromJson(docs.elementAt(index)));
           break;
         case "Vehicle":
-          list.add(Vehicle.fromJson(docs.elementAt(index)));
+          itemList.add(Vehicle.fromJson(docs.elementAt(index)));
+          vehicleList.add(Vehicle.fromJson(docs.elementAt(index)));
           break;
       }
     }

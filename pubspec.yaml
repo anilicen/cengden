@@ -31,6 +31,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Architecture
+  flutter_clean_architecture:
+    git:
+      url: https://github.com/kasmurat/flutter_clean_architecture.git
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
