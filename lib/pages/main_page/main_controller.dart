@@ -1,16 +1,22 @@
 import 'package:cengden/domain/entities/Item.dart';
+import 'package:cengden/domain/entities/User.dart';
 import 'package:cengden/domain/repositories/item_repository.dart';
+import 'package:cengden/navigator.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 class MainController extends Controller {
   MainController(
     ItemRepository itemRepository,
-  ) : _itemRepository = itemRepository;
+    User user,
+  )   : _itemRepository = itemRepository,
+        user = user;
 
   final ItemRepository _itemRepository;
   List<Item>? itemList;
   int pageNumber = 0;
   String pageType = "Items";
+  User user;
   // List<Item> itemList = ItemRepository.itemList;
   @override
   Future<void> onInitState() async {
@@ -109,5 +115,9 @@ class MainController extends Controller {
     }
     pageType = "PrivateLessons";
     refreshUI();
+  }
+
+  void navigateToRegistrationView(BuildContext context) {
+    CengdenNavigator.navigateToRegistrationView(context);
   }
 }

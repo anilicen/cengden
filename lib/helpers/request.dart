@@ -36,6 +36,28 @@ class Request {
     );
   }
 
+  static Future<void> addUser(Map<String, dynamic> json) async {
+    var url = "$endpoint/action/insertOne";
+
+    await Dio().post(
+      url,
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "users",
+          "document": json,
+        },
+      ),
+    );
+  }
+
   static Future<void> sendPostRequest(List<bool> token) async {
     var url = Uri.parse(link);
     var response = await http.post(

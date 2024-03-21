@@ -1,8 +1,18 @@
+import 'package:cengden/constants.dart';
+import 'package:cengden/domain/entities/User.dart';
 import 'package:cengden/pages/main_page/main_view.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-  runApp(MainView());
+  User user = User(
+    email: '',
+    id: '',
+    password: '',
+    name: '',
+    phoneNumber: '',
+    userType: UserType.REGULAR,
+  );
+  runApp(MainView(user));
 }
 
 //2OVBeAxmXvUf7rQmWABHcpnVZRt7v5P2kb7ALonEfAtn9AtXKtJHi0yAFWrLVeUz mongoDB key
@@ -125,3 +135,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+//recovery code: 31ELATJ7CWJP3P1AJBZV14J6

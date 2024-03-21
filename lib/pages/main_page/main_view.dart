@@ -1,17 +1,20 @@
+import 'package:cengden/constants.dart';
 import 'package:cengden/data/repositories/item_repository.dart';
 import 'package:cengden/domain/entities/Computer.dart';
 import 'package:cengden/domain/entities/Phone.dart';
 import 'package:cengden/domain/entities/PrivateLesson.dart';
+import 'package:cengden/domain/entities/User.dart';
 import 'package:cengden/domain/entities/Vehicle.dart';
-import 'package:cengden/helpers/request_helper.dart';
 import 'package:cengden/pages/main_page/item_containers.dart';
 import 'package:cengden/pages/main_page/main_controller.dart';
 import 'package:cengden/widgets/primary_button.dart';
 import 'package:flutter/material.dart' hide View;
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
+// ignore: must_be_immutable
 class MainView extends View {
-  MainView();
+  User user;
+  MainView(this.user, {super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -19,6 +22,7 @@ class MainView extends View {
     return _MainViewState(
       MainController(
         DataItemRepository(),
+        user,
       ),
     );
   }
@@ -32,6 +36,7 @@ class _MainViewState extends ViewState<MainView, MainController> {
     Size size = MediaQuery.of(context).size;
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: const Color(0xffd6faf1),
         body: SizedBox(
           width: size.width,
           height: size.height,
@@ -66,12 +71,20 @@ class _MainViewState extends ViewState<MainView, MainController> {
                         onPressed: () => controller.showAllItems(),
                         child: const Text("Show All Items"),
                       ),
+                      const Spacer(),
+                      controller.user.userType == UserType.REGULAR
+                          ? TextButton(
+                              onPressed: () => controller.navigateToRegistrationView(context),
+                              child: const Text("Register"),
+                            )
+                          : const SizedBox(),
+                      const SizedBox(width: 50),
                     ],
                   ),
                   Container(
                     width: size.width,
                     height: 70,
-                    color: Colors.black.withOpacity(0.1),
+                    color: const Color(0xff17cda0),
                     child: Text(
                       "CENGDEN",
                       textAlign: TextAlign.center,
@@ -94,7 +107,7 @@ class _MainViewState extends ViewState<MainView, MainController> {
                                             height: 150,
                                             width: size.width * 0.8,
                                             decoration: BoxDecoration(
-                                              color: Colors.grey,
+                                              color: const Color(0xffa3f4e0),
                                               borderRadius: BorderRadius.circular(15),
                                               boxShadow: [
                                                 BoxShadow(
@@ -125,6 +138,7 @@ class _MainViewState extends ViewState<MainView, MainController> {
                                 : PrimaryButton(
                                     text: "< PREV",
                                     onPressed: () => controller.goToPrevPage(),
+                                    isEnabled: true,
                                   ),
                             Text("Page Number: ${controller.pageNumber + 1}"),
                             controller.itemList!.length < (controller.pageNumber + 1) * 10
@@ -132,6 +146,7 @@ class _MainViewState extends ViewState<MainView, MainController> {
                                 : PrimaryButton(
                                     text: "NEXT > ",
                                     onPressed: () => controller.goToNextPage(),
+                                    isEnabled: true,
                                   ),
                           ],
                         )

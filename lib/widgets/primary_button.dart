@@ -6,6 +6,8 @@ class PrimaryButton extends StatelessWidget {
   final double? width;
   final bool expanded;
   final bool shadow;
+  final bool isEnabled;
+  final double? height;
 
   const PrimaryButton({
     required this.text,
@@ -13,20 +15,18 @@ class PrimaryButton extends StatelessWidget {
     this.width,
     this.expanded = false,
     this.shadow = false,
+    this.height,
+    required this.isEnabled,
   }) : assert(width == null || expanded == false, 'Cannot provide both width and expanded at the same time\n\n');
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 200),
-      width: expanded
-          ? double.infinity
-          : width != null
-              ? width
-              : 186,
-      height: 41,
+      width: expanded ? double.infinity : width ?? 186,
+      height: height ?? 41,
       decoration: BoxDecoration(
-        color: onPressed == null ? Colors.blue.withOpacity(0.25) : Colors.blue,
+        color: isEnabled ? Colors.blue : Colors.blue.withOpacity(0.25),
         borderRadius: BorderRadius.circular(37),
         boxShadow: [
           if (shadow)
@@ -51,7 +51,7 @@ class PrimaryButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: onPressed,
+        onPressed: isEnabled ? onPressed : null,
       ),
     );
   }
