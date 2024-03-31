@@ -25590,7 +25590,7 @@ return A.E($async$a9h,r)},
 ab1(a,b){var s=0,r=A.F(t.H),q=1,p,o,n,m,l,k,j,i
 var $async$ab1=A.G(function(c,d){if(c===1){p=d
 s=q}while(true)switch(s){case 0:k=A.fs("https://7k3fz34az34wqvj5f6htmzodty0bwaml.lambda-url.eu-north-1.on.aws/")
-j=A.a3(["email","anil.icen@metu.edu.tr","verificationCode",b],t.N,t.z)
+j=A.a3(["email",a,"verificationCode",b],t.N,t.z)
 q=3
 s=6
 return A.K(A.ayj(k,B.a0.fh(j,null)),$async$ab1)
