@@ -82,7 +82,6 @@ class MainController extends Controller {
       itemList = _itemRepository.getPhoneList();
     }
     pageType = "Phones";
-    RequestHelper(user).addItem();
     refreshUI();
   }
 
