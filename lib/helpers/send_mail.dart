@@ -9,7 +9,7 @@ class SendMail {
   ) async {
     final url = Uri.parse('https://7k3fz34az34wqvj5f6htmzodty0bwaml.lambda-url.eu-north-1.on.aws/');
     final Map<String, dynamic> data = {
-      'email': 'anil.icen@metu.edu.tr',
+      'email': email,
       'verificationCode': verificationCode,
     };
     // print('email here: ' + data['email']);
@@ -26,10 +26,3 @@ class SendMail {
     }
   }
 }
-// msg = {
-//         to: event['email'], // Change to your recipient
-//         from: 'e2448488@ceng.metu.edu.tr', // Change to your verified sender
-//         subject: 'Verification Code Cengden',
-//         text: 'Your verification code is: '+ event['verificationCode'],
-//         html:'<strong>Your verification code is:' + event["verificationCode"] + '</strong>',
-//     };
