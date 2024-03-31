@@ -2,6 +2,7 @@ import 'package:cengden/data/repositories/user_repository.dart';
 import 'package:cengden/pages/registration_page/registration_controller.dart';
 import 'package:cengden/widgets/primary_button.dart';
 import 'package:cengden/widgets/text_field.dart';
+import 'package:cengden/widgets/text_field_without_text.dart';
 import 'package:flutter/material.dart' hide View;
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
@@ -70,7 +71,7 @@ class _RegistrationViewState extends ViewState<RegistrationView, RegistrationCon
                         width: size.width / 2,
                         child: ListView(
                           children: [
-                            CengdenTextField(
+                            CengdenTextFieldWithoutText(
                               size: size / 2,
                               title: 'E-Mail',
                               hintText: "E-Mail here",
@@ -79,7 +80,7 @@ class _RegistrationViewState extends ViewState<RegistrationView, RegistrationCon
                               color: Colors.black,
                             ),
                             const SizedBox(height: 50),
-                            CengdenTextField(
+                            CengdenTextFieldWithoutText(
                               size: size / 2,
                               title: 'Name',
                               hintText: "Name here",
@@ -88,7 +89,7 @@ class _RegistrationViewState extends ViewState<RegistrationView, RegistrationCon
                               color: Colors.black,
                             ),
                             const SizedBox(height: 50),
-                            CengdenTextField(
+                            CengdenTextFieldWithoutText(
                               size: size / 2,
                               title: 'Phone Number',
                               hintText: "Phone Number here",
@@ -97,7 +98,7 @@ class _RegistrationViewState extends ViewState<RegistrationView, RegistrationCon
                               color: Colors.black,
                             ),
                             const SizedBox(height: 50),
-                            CengdenTextField(
+                            CengdenTextFieldWithoutText(
                               size: size / 2,
                               title: 'Password',
                               hintText: "Password here",
@@ -106,7 +107,7 @@ class _RegistrationViewState extends ViewState<RegistrationView, RegistrationCon
                               color: Colors.black,
                             ),
                             const SizedBox(height: 50),
-                            CengdenTextField(
+                            CengdenTextFieldWithoutText(
                               size: size / 2,
                               title: 'Password Again',
                               hintText: "Password here",

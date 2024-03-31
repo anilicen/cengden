@@ -278,7 +278,7 @@ class PrivateLessonContainer extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                "TUtor Name: ${privateLesson.tutorName}",
+                "Tutor Name: ${privateLesson.tutorName}",
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
               ),
               const SizedBox(height: 4),

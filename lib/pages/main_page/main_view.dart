@@ -73,11 +73,30 @@ class _MainViewState extends ViewState<MainView, MainController> {
                       ),
                       const Spacer(),
                       controller.user.userType == UserType.REGULAR
-                          ? TextButton(
-                              onPressed: () => controller.navigateToRegistrationView(context),
-                              child: const Text("Register"),
+                          ? Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () => controller.navigateToRegistrationView(context),
+                                  child: const Text("Register"),
+                                ),
+                                TextButton(
+                                  onPressed: () => controller.navigateToLoginView(context),
+                                  child: const Text("Login"),
+                                ),
+                              ],
                             )
-                          : const SizedBox(),
+                          : Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () => controller.navigateToProfileView(context),
+                                  child: const Text("Profile"),
+                                ),
+                                TextButton(
+                                  onPressed: () => controller.navigateToAddItemView(context),
+                                  child: const Text("Add Item"),
+                                ),
+                              ],
+                            ),
                       const SizedBox(width: 50),
                     ],
                   ),
@@ -103,22 +122,26 @@ class _MainViewState extends ViewState<MainView, MainController> {
                                 Column(
                                   children: [
                                     controller.itemList!.length > (controller.pageNumber * 10) + index
-                                        ? Container(
-                                            height: 150,
-                                            width: size.width * 0.8,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xffa3f4e0),
-                                              borderRadius: BorderRadius.circular(15),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey.withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: const Offset(0, 3), // changes position of shadow
-                                                ),
-                                              ],
+                                        ? GestureDetector(
+                                            onTap: () => controller.navigateToItemDetailsView(
+                                                context, controller.itemList![(controller.pageNumber * 10) + index]),
+                                            child: Container(
+                                              height: 150,
+                                              width: size.width * 0.8,
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xffa3f4e0),
+                                                borderRadius: BorderRadius.circular(15),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey.withOpacity(0.5),
+                                                    spreadRadius: 5,
+                                                    blurRadius: 7,
+                                                    offset: const Offset(0, 3), // changes position of shadow
+                                                  ),
+                                                ],
+                                              ),
+                                              child: _buildSwitchCase(controller, (controller.pageNumber * 10) + index),
                                             ),
-                                            child: _buildSwitchCase(controller, (controller.pageNumber * 10) + index),
                                           )
                                         : const SizedBox(),
                                     const SizedBox(height: 20),
@@ -149,7 +172,7 @@ class _MainViewState extends ViewState<MainView, MainController> {
                                     isEnabled: true,
                                   ),
                           ],
-                        )
+                        ),
                 ],
               );
             },

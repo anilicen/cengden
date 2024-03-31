@@ -1,5 +1,6 @@
 import 'package:cengden/constants.dart';
 import 'package:cengden/domain/entities/User.dart';
+import 'package:cengden/helpers/request_helper.dart';
 import 'package:cengden/pages/main_page/main_view.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ Future<void> main() async {
     name: '',
     phoneNumber: '',
     userType: UserType.REGULAR,
+    favoriteItemList: [],
   );
   runApp(MainView(user));
 }

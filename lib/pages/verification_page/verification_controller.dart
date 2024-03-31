@@ -26,7 +26,6 @@ class VerificationController extends Controller {
 
   void setVerificationCode(String value) {
     usersVerificationCode = value;
-    print("code: " + usersVerificationCode! + "len: " + usersVerificationCode!.length.toString());
     if (usersVerificationCode!.length == 4) {
       isEnabled = true;
     } else {

@@ -9,6 +9,7 @@ class CengdenTextField extends StatelessWidget {
     required this.isObscure,
     required this.onChanged,
     this.color,
+    this.text,
   });
 
   final Size size;
@@ -17,6 +18,7 @@ class CengdenTextField extends StatelessWidget {
   final bool isObscure;
   final void Function(String text) onChanged;
   final Color? color;
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class CengdenTextField extends StatelessWidget {
           ),
           SizedBox(height: 6),
           TextField(
+            controller: TextEditingController()..text = text ?? "",
             style: TextStyle(height: 1),
             obscureText: isObscure,
             decoration: InputDecoration(

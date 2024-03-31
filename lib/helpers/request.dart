@@ -1,6 +1,8 @@
+import 'package:cengden/constants.dart';
 import 'package:cengden/domain/entities/Computer.dart';
 import 'package:cengden/domain/entities/Phone.dart';
 import 'package:cengden/domain/entities/PrivateLesson.dart';
+import 'package:cengden/domain/entities/User.dart';
 import 'package:cengden/domain/entities/Vehicle.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +16,7 @@ class Request {
   static String? userId;
   static const String endpoint = "https://eu-central-1.aws.data.mongodb-api.com/app/data-jtnzf/endpoint/data/v1";
 
-  static void addItem(Map<String, dynamic> json) async {
+  static Future<void> addItem(Map<String, dynamic> json) async {
     var url = "$endpoint/action/insertOne";
 
     await Dio().post(
@@ -34,6 +36,79 @@ class Request {
         },
       ),
     );
+  }
+
+  static Future<void> updateUser(User user) async {
+    var response = await Dio().post(
+      "$endpoint/action/updateOne",
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "users",
+          "filter": {'email': user.email},
+          "update": {
+            "\$set": {"password": user.password, "name": user.name, "phoneNumber": user.phoneNumber}
+          }
+        },
+      ),
+    );
+  }
+
+  static Future<void> updateUserFavoriteList(User user) async {
+    var response = await Dio().post(
+      "$endpoint/action/updateOne",
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "users",
+          "filter": {'email': user.email},
+          "update": {
+            "\$set": {"favoriteItemList": user.favoriteItemList.join(', ')}
+          }
+        },
+      ),
+    );
+  }
+
+  static Future<void> updateItem(Map<String, dynamic> json, String id) async {
+    var response = await Dio().post(
+      "$endpoint/action/updateOne",
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "items",
+          "filter": {
+            "_id": {"\$oid": id}
+          },
+          "update": {
+            "\$set": json,
+          }
+        },
+      ),
+    );
+    print("JSON:");
+    print(json);
   }
 
   static Future<void> addUser(Map<String, dynamic> json) async {
@@ -69,6 +144,43 @@ class Request {
     token[0] = true;
     refreshToken = parsedResponse['refresh_token'];
     userId = parsedResponse['user_id'];
+  }
+
+  static Future<User> getUserWithEmail(String email) async {
+    final params = {'skip': 0, 'limit': 1};
+
+    var response = await Dio().post(
+      '$endpoint/action/find',
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "users",
+          "filter": {'email': email},
+          ...params,
+        },
+      ),
+    );
+    List docs = response.data['documents'];
+    if (docs.isEmpty) {
+      return User(
+        email: "NOT FOUND",
+        id: '',
+        password: '',
+        name: '',
+        phoneNumber: '',
+        userType: UserType.REGULAR,
+        favoriteItemList: [],
+      );
+    } else {
+      return User.fromJson(docs.elementAt(0));
+    }
   }
 
   static Future<void> getPhoneItems(List<Phone> phoneList, int skip, int limit) async {
@@ -150,6 +262,48 @@ class Request {
     for (int index = 0; index < docs.length; index++) {
       computerItems.add(Computer.fromJson(docs.elementAt(index)));
     }
+  }
+
+  static Future<void> deleteItem(String id) async {
+    var response = await Dio().post(
+      '$endpoint/action/deleteOne',
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "items",
+          "filter": {
+            "_id": {"\$oid": id}
+          },
+        },
+      ),
+    );
+  }
+
+  static Future<void> deleteUser(String email) async {
+    var response = await Dio().post(
+      '$endpoint/action/deleteOne',
+      options: Options(
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer $accessToken',
+        },
+      ),
+      data: jsonEncode(
+        {
+          "dataSource": "Cluster0",
+          "database": "trial",
+          "collection": "users",
+          "filter": {'email': email},
+        },
+      ),
+    );
   }
 
   static Future<void> getPrivateLessonItems(List<PrivateLesson> privateLessonList, int skip, int limit) async {

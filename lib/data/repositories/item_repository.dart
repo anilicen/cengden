@@ -66,4 +66,19 @@ class DataItemRepository implements ItemRepository {
   Future<void> getVehicleItems(int skip, int limit) async {
     await Request.getVehicleItems(vehicleList, skip, limit);
   }
+
+  @override
+  Future<void> addItem(Map<String, dynamic> json) async {
+    await Request.addItem(json);
+  }
+
+  @override
+  Future<void> deleteItem(String id) async {
+    await Request.deleteItem(id);
+  }
+
+  @override
+  Future<void> updateItem(Map<String, dynamic> json, String id) async {
+    await Request.updateItem(json, id);
+  }
 }

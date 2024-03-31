@@ -1,4 +1,5 @@
 import 'package:cengden/domain/entities/Item.dart';
+import 'package:cengden/domain/entities/User.dart';
 
 class Computer extends Item {
   final String itemType = "Computer";
@@ -16,6 +17,7 @@ class Computer extends Item {
   final String price;
   final String image;
   final String description;
+  final User createdBy;
 
   Computer({
     required this.id,
@@ -32,6 +34,7 @@ class Computer extends Item {
     required this.price,
     required this.image,
     required this.description,
+    required this.createdBy,
   });
 
   Map<String, dynamic> toJson() {
@@ -50,6 +53,7 @@ class Computer extends Item {
       'price': price,
       'image': image,
       'description': description,
+      'createdBy': createdBy.toJson(),
     };
   }
 
@@ -67,5 +71,41 @@ class Computer extends Item {
         operatingSystem = json['operatingSystem'],
         price = json['price'],
         image = json['image'],
-        description = json['description'];
+        description = json['description'],
+        createdBy = User.fromJson(json['createdBy']);
+
+  Computer copyWith({
+    String? id,
+    String? title,
+    String? type,
+    String? brand,
+    String? model,
+    String? year,
+    String? processor,
+    String? ram,
+    Map<String, String>? storage,
+    String? graphicsCard,
+    String? operatingSystem,
+    String? price,
+    String? image,
+    String? description,
+  }) {
+    return Computer(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      type: type ?? this.type,
+      brand: brand ?? this.brand,
+      model: model ?? this.model,
+      year: year ?? this.year,
+      processor: processor ?? this.processor,
+      ram: ram ?? this.ram,
+      storage: storage != null ? {...this.storage, ...storage} : this.storage,
+      graphicsCard: graphicsCard ?? this.graphicsCard,
+      operatingSystem: operatingSystem ?? this.operatingSystem,
+      price: price ?? this.price,
+      image: image ?? this.image,
+      description: description ?? this.description,
+      createdBy: createdBy,
+    );
+  }
 }

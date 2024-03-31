@@ -3,6 +3,7 @@ import 'package:cengden/domain/entities/User.dart';
 import 'package:cengden/pages/verification_page/verification_controller.dart';
 import 'package:cengden/widgets/primary_button.dart';
 import 'package:cengden/widgets/text_field.dart';
+import 'package:cengden/widgets/text_field_without_text.dart';
 import 'package:flutter/material.dart' hide View;
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
@@ -69,12 +70,15 @@ class _VerificationViewState extends ViewState<VerificationView, VerificationCon
                 const SizedBox(
                   height: 200,
                 ),
-                CengdenTextField(
-                  size: size,
-                  title: "Verification Code",
-                  hintText: "Verification Code",
-                  isObscure: false,
-                  onChanged: controller.setVerificationCode,
+                SizedBox(
+                  width: size.width / 3,
+                  child: CengdenTextFieldWithoutText(
+                    size: size,
+                    title: "Verification Code",
+                    hintText: "Verification Code",
+                    isObscure: false,
+                    onChanged: controller.setVerificationCode,
+                  ),
                 ),
                 const SizedBox(height: 20),
                 const Text(

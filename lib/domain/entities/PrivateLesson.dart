@@ -1,4 +1,5 @@
 import 'package:cengden/domain/entities/Item.dart';
+import 'package:cengden/domain/entities/User.dart';
 
 class PrivateLesson extends Item {
   final String itemType = "PrivateLesson";
@@ -11,6 +12,7 @@ class PrivateLesson extends Item {
   final String price;
   final String image;
   final String description;
+  final User createdBy;
 
   PrivateLesson({
     required this.id,
@@ -22,6 +24,7 @@ class PrivateLesson extends Item {
     required this.price,
     required this.image,
     required this.description,
+    required this.createdBy,
   });
 
   Map<String, dynamic> toJson() {
@@ -35,6 +38,7 @@ class PrivateLesson extends Item {
       'price': price,
       'image': image,
       'description': description,
+      'createdBy': createdBy.toJson(),
     };
   }
 
@@ -47,5 +51,31 @@ class PrivateLesson extends Item {
         duration = json['duration'],
         price = json['price'],
         image = json['image'],
-        description = json['description'];
+        description = json['description'],
+        createdBy = User.fromJson(json['createdBy']);
+
+  PrivateLesson copyWith({
+    String? id,
+    String? title,
+    String? tutorName,
+    List<String>? lessons,
+    String? location,
+    String? duration,
+    String? price,
+    String? image,
+    String? description,
+  }) {
+    return PrivateLesson(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      tutorName: tutorName ?? this.tutorName,
+      lessons: lessons ?? this.lessons,
+      location: location ?? this.location,
+      duration: duration ?? this.duration,
+      price: price ?? this.price,
+      image: image ?? this.image,
+      description: description ?? this.description,
+      createdBy: createdBy,
+    );
+  }
 }

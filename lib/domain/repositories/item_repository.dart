@@ -10,6 +10,9 @@ abstract class ItemRepository {
   List<Vehicle> getVehicleList();
   List<Computer> getComputerList();
   List<PrivateLesson> getPrivateLessonList();
+  Future<void> updateItem(Map<String, dynamic> json, String id);
+  Future<void> deleteItem(String id);
+  Future<void> addItem(Map<String, dynamic> json);
   Future<void> getItems(int skip);
   Future<void> getPhoneItems(int skip, int limit);
   Future<void> getVehicleItems(int skip, int limit);

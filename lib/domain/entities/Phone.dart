@@ -1,4 +1,5 @@
 import 'package:cengden/domain/entities/Item.dart';
+import 'package:cengden/domain/entities/User.dart';
 
 class Phone extends Item {
   final String itemType = "Phone";
@@ -16,6 +17,7 @@ class Phone extends Item {
   final String price;
   final String image;
   final String description;
+  final User createdBy;
 
   Phone({
     required this.id,
@@ -32,6 +34,7 @@ class Phone extends Item {
     required this.price,
     required this.image,
     required this.description,
+    required this.createdBy,
   });
 
   Map<String, dynamic> toJson() {
@@ -50,6 +53,7 @@ class Phone extends Item {
       'price': price,
       'image': image,
       'description': description,
+      'createdBy': createdBy.toJson()
     };
   }
 
@@ -67,5 +71,40 @@ class Phone extends Item {
         batteryCapacity = json['batteryCapacity'],
         price = json['price'],
         image = json['image'],
-        description = json['description'];
+        description = json['description'],
+        createdBy = User.fromJson(json['createdBy']);
+  Phone copyWith({
+    String? id,
+    String? title,
+    String? brand,
+    String? model,
+    String? year,
+    String? operatingSystem,
+    String? processor,
+    String? ram,
+    String? storage,
+    Map<String, String>? cameraSpecs,
+    String? batteryCapacity,
+    String? price,
+    String? image,
+    String? description,
+  }) {
+    return Phone(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      brand: brand ?? this.brand,
+      model: model ?? this.model,
+      year: year ?? this.year,
+      operatingSystem: operatingSystem ?? this.operatingSystem,
+      processor: processor ?? this.processor,
+      ram: ram ?? this.ram,
+      storage: storage ?? this.storage,
+      cameraSpecs: cameraSpecs != null ? {...this.cameraSpecs, ...cameraSpecs} : this.cameraSpecs,
+      batteryCapacity: batteryCapacity ?? this.batteryCapacity,
+      price: price ?? this.price,
+      image: image ?? this.image,
+      description: description ?? this.description,
+      createdBy: createdBy,
+    );
+  }
 }

@@ -92,6 +92,7 @@ class RegistrationController extends Controller {
         name: name!,
         phoneNumber: phoneNumber!,
         userType: UserType.AUTH,
+        favoriteItemList: [],
       );
 
       print(email!);

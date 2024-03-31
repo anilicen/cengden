@@ -1,4 +1,5 @@
 import 'package:cengden/domain/entities/Item.dart';
+import 'package:cengden/domain/entities/User.dart';
 
 class Vehicle extends Item {
   final String itemType = "Vehicle";
@@ -16,6 +17,12 @@ class Vehicle extends Item {
   final String price;
   final String image;
   final String description;
+  final User createdBy;
+  final String? batteryCapacity;
+  final String? range;
+  final String? bedCapacity;
+  final String? waterCapacity;
+  final String? payloadCapacity;
 
   Vehicle({
     required this.id,
@@ -32,6 +39,12 @@ class Vehicle extends Item {
     required this.price,
     required this.image,
     required this.description,
+    required this.createdBy,
+    this.batteryCapacity,
+    this.range,
+    this.bedCapacity,
+    this.waterCapacity,
+    this.payloadCapacity,
   });
   Map<String, dynamic> toJson() {
     return {
@@ -49,6 +62,12 @@ class Vehicle extends Item {
       'price': price,
       'image': image,
       'description': description,
+      'createdBy': createdBy.toJson(),
+      'batteryCapacity': batteryCapacity,
+      'range': range,
+      'bedCapacity': bedCapacity,
+      'waterCapacity': waterCapacity,
+      'payloadCapacity': payloadCapacity,
     };
   }
 
@@ -66,5 +85,51 @@ class Vehicle extends Item {
         mileage = json['mileage'],
         price = json['price'],
         image = json['image'],
-        description = json['description'];
+        description = json['description'],
+        createdBy = User.fromJson(json['createdBy']),
+        batteryCapacity = json['batteryCapacity'],
+        bedCapacity = json['bedCapacity'],
+        waterCapacity = json['waterCapacity'],
+        payloadCapacity = json['payloadCapacity'],
+        range = json['range'];
+
+  Vehicle copyWith({
+    String? id,
+    String? title,
+    String? type,
+    String? brand,
+    String? model,
+    String? year,
+    String? color,
+    String? engineDisplacement,
+    String? fuelType,
+    String? transmissionType,
+    String? mileage,
+    String? price,
+    String? image,
+    String? description,
+  }) {
+    return Vehicle(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      type: type ?? this.type,
+      brand: brand ?? this.brand,
+      model: model ?? this.model,
+      year: year ?? this.year,
+      color: color ?? this.color,
+      engineDisplacement: engineDisplacement ?? this.engineDisplacement,
+      fuelType: fuelType ?? this.fuelType,
+      transmissionType: transmissionType ?? this.transmissionType,
+      mileage: mileage ?? this.mileage,
+      price: price ?? this.price,
+      image: image ?? this.image,
+      description: description ?? this.description,
+      createdBy: createdBy,
+      waterCapacity: waterCapacity,
+      bedCapacity: bedCapacity,
+      batteryCapacity: batteryCapacity,
+      payloadCapacity: payloadCapacity,
+      range: range,
+    );
+  }
 }

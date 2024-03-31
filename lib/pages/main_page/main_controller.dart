@@ -1,6 +1,7 @@
 import 'package:cengden/domain/entities/Item.dart';
 import 'package:cengden/domain/entities/User.dart';
 import 'package:cengden/domain/repositories/item_repository.dart';
+import 'package:cengden/helpers/request_helper.dart';
 import 'package:cengden/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
@@ -81,6 +82,7 @@ class MainController extends Controller {
       itemList = _itemRepository.getPhoneList();
     }
     pageType = "Phones";
+    RequestHelper(user).addItem();
     refreshUI();
   }
 
@@ -119,5 +121,21 @@ class MainController extends Controller {
 
   void navigateToRegistrationView(BuildContext context) {
     CengdenNavigator.navigateToRegistrationView(context);
+  }
+
+  void navigateToLoginView(BuildContext context) {
+    CengdenNavigator.navigateToLoginView(context);
+  }
+
+  void navigateToItemDetailsView(BuildContext context, item) {
+    CengdenNavigator.navigateToItemDetailsView(context, item, user);
+  }
+
+  void navigateToAddItemView(BuildContext context) {
+    CengdenNavigator.navigateToAddItemView(context, user);
+  }
+
+  void navigateToProfileView(BuildContext context) {
+    CengdenNavigator.navigateToProfileView(context, user);
   }
 }
